@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            animation: bg 5s infinite linear;
+            margin: 0;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background 1s ease-in-out;
+            background: linear-gradient(72deg, pink, rgb(239, 117, 135));
+            overflow: hidden;
+        }
+
+        h1 {
+            color: pink;
+            text-align: center;
+            font-family: 'Comic Sans MS', sans-serif;
+            font-size: 3rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        fieldset {
+            border-radius: 20px;
+            width: 800px;
+            border-color: white;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        p {
+            text-align: justify;
+            font-size: 18px;
+            line-height: 1.6;
+            font-family: 'Comic Sans MS', sans-serif;
+            margin-bottom: 20px;
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+        }
+
+        .slideshow-container img {
+            width: 100%;
+            height: 600px; /* Tinggi yang diinginkan */
+            object-fit: cover; /* Memastikan gambar tetap rapi tanpa distorsi */
+            border-radius: 10px;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev {
+            left: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .confetti {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: red;
+            opacity: 0.8;
+            animation: fall 3s linear infinite;
+            border-radius: 50%;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes bg {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Sayang</title>
+</head>
+<body>
+    <audio src="y2mate.com - Happy Birthday Piano Version.mp3" autoplay loop></audio>
+    <fieldset>
+        <h1>Happy Birthday Sayangkuu</h1>
+
+        <p>
+            Happy Birthday Sayangku, sudah makin tua saja ya kamu! Semoga terus menjadi pendamping awak yaa sayang,
+            jangan pernah pergi dari awak. Awak sayang banget sama kamu, semoga menjadi anak yang sukses yaa cinta.
+            Kamu juga harus kuat, pokoknya jangan lemah. Maaf kalau awak sering tidak ada waktu buat kamu sampai kamu
+            nangis terus gara-gara awak. MAAAF YA SAYANG. Awak berharap kita yang awak sayang jadi lebih baik dari sebelumnya,
+            bahagia terus dan jangan nangis lagi.
+        </p>
+
+        <!-- Slideshow Gambar -->
+        <div class="slideshow-container">
+            <img src="1.jpg" alt="Gambar 1" id="slideshow-image">
+            <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+            <a class="next" onclick="changeSlide(1)">&#10095;</a>
+        </div>
+    </fieldset>
+
+    <script>
+        function createConfetti() {
+            const confettiElement = document.createElement('div');
+            confettiElement.classList.add('confetti');
+            document.body.appendChild(confettiElement);
+
+            // Set random position and colors for each confetti
+            confettiElement.style.left = Math.random() * 100 + 'vw';
+            confettiElement.style.backgroundColor = getRandomColor();
+
+            // Remove confetti after animation ends
+            setTimeout(() => {
+                confettiElement.remove();
+            }, 3000);
+        }
+
+        function getRandomColor() {
+            const colors = ['#ffcc00', '#ff6666', '#66b3ff', '#66ff66', '#ff99cc'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        // Generate multiple confetti at once
+        setInterval(createConfetti, 100);
+
+        const images = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "a.jpg", "b.jpg", "c.jpg"];
+        let currentImageIndex = 0;
+
+        function changeSlide(direction) {
+            currentImageIndex += direction;
+
+            if (currentImageIndex >= images.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1;
+            }
+
+            document.getElementById("slideshow-image").src = images[currentImageIndex];
+        }
+
+        // Set up automatic slideshow
+        function autoSlide() {
+            changeSlide(1); // Move to the next slide
+        }
+
+        // Start the slideshow, change image every 3 seconds
+        setInterval(autoSlide, 3000);
+    </script>
+</body>
+</html>
